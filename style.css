@@ -5,10 +5,19 @@
 }
 
 body {
+  background-color: #e4dccf;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   overflow: hidden;
+}
+
+.calculator {
+  width: 400px;
+  height: 650px;
+  background-color: #aaa;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
 }
