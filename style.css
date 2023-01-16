@@ -3,6 +3,8 @@
   src: url(./font/Segment7Standard.otf);
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -22,7 +24,6 @@ body {
 .calculator {
   width: 400px;
   height: 625px;
-  background-color: #aaa;
   display: grid;
   grid-template-rows: 1fr 2fr;
   padding: 0.5rem;
@@ -79,11 +80,66 @@ body {
 }
 
 .display-back-text {
-  color: #859981;
+  color: #8599814b;
   z-index: -1;
 }
 
 .display #result {
   color: #383a39;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 3px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.keyboard {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  padding-top: 1rem;
+  grid-gap: 10px;
+}
+
+.keyboard .digits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 20px;
+  column-gap: 10px;
+}
+
+.keyboard .operations {
+  display: grid;
+  grid-template-rows: 3.12fr 2fr;
+  gap: 20px;
+}
+
+.keyboard .operations div {
+  display: grid;
+  gap: 20px;
+}
+
+button {
+  background-color: #45494c;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 10px 0 #343739;
+  font-family: "Roboto", sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e4dccf;
+  cursor: pointer;
+}
+
+button.red {
+  background-color: #c72d2d;
+  box-shadow: 0 10px 0 #aa2626;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:active {
+  transform: translateY(5px);
+  box-shadow: 0 5px 0 #252728;
+}
+
+button.red:active {
+  box-shadow: 0 5px 0 #8f1f1f;
 }
