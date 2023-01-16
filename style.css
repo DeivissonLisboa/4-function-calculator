@@ -69,24 +69,16 @@ body {
   box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2) inset;
 }
 
-.display div {
+.display #result {
+  width: 100%;
   position: absolute;
   top: 60%;
-  right: 5%;
+  left: 0;
   transform: translateY(-50%);
   font-family: Segment7, sans-serif;
   font-size: 4rem;
-  letter-spacing: 0.5rem;
-}
-
-.display-back-text {
-  color: #8599814b;
-  z-index: -1;
-}
-
-.display #result {
-  color: #383a39;
-  text-shadow: 3px 2px 2px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.3rem;
+  text-align: center;
 }
 
 .keyboard {
