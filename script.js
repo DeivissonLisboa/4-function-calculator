@@ -1,8 +1,6 @@
 const displayResult = document.getElementById("result")
-const displayBackText = document.querySelector(".display-back-text")
 const digits = document.querySelectorAll(".digit")
 
-let displayArray = []
 let cache = ""
 
 digits.forEach((digit) => {
@@ -52,9 +50,29 @@ function digitClick(key) {
     case "digitDOT":
       cache += "."
       break
+    default:
+      return
   }
 
   updateDisplay(cache)
+}
+
+function checkInput(input) {
+  input = input.toString()
+
+  if (
+    input < 0 &&
+    input.includes(".") &&
+    input.replace("-", "").replaceAll(".", "").length > 7
+  ) {
+    input = input.slice(1, 6)
+  } else if (input < 0) {
+    input = input.slice(0, 7)
+  } else if (input.length > 6) {
+    input = input.slice(0, 6)
+  }
+
+  return input
 }
 
 function clearDisplay() {
@@ -63,13 +81,8 @@ function clearDisplay() {
 }
 
 function updateDisplay(input) {
-  return
+  const result = checkInput(input)
+  displayResult.innerHTML = result
 }
 
-// updateDisplay(0)
-
-for (let i = 0; i < 13; i++) {
-  span = document.createElement("span")
-  displayArray.push(span)
-  displayResult.appendChild(span)
-}
+updateDisplay(0)
