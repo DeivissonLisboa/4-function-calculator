@@ -8,6 +8,7 @@ class Calculator {
     this.currentOperand = ""
     this.previuosOperand = ""
     this.operation = undefined
+    this.updateDisplay()
   }
 
   appendNumber(number) {
@@ -30,6 +31,10 @@ class Calculator {
   compute() {}
 
   updateDisplay() {
-    this.display.innerText = this.currentOperand
+    if (this.currentOperand === "") {
+      this.display.innerText = 0
+    } else {
+      this.display.innerText = this.currentOperand
+    }
   }
 }

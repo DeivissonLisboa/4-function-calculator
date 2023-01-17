@@ -7,8 +7,10 @@ const resultText = document.querySelector("#result")
 const calculator = new Calculator(resultText)
 
 digitBtns.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
+  btn.addEventListener("click", () => {
     calculator.appendNumber(btn.innerText)
     calculator.updateDisplay()
   })
 })
+
+clearBtn.addEventListener("click", () => calculator.clear())
