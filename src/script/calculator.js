@@ -1,21 +1,35 @@
 class Calculator {
   constructor(display) {
     this.display = display
-    this.previuos = ""
     this.clear()
   }
 
   clear() {
-    this.display = ""
-    this.previuos = ""
+    this.currentOperand = ""
+    this.previuosOperand = ""
     this.operation = undefined
   }
 
-  appendNumber(number) {}
+  appendNumber(number) {
+    if (number === "." && this.currentOperand.includes(".")) return
+
+    if (this.currentOperand.includes(".") && this.currentOperand.length > 6) {
+      return
+    } else if (
+      !this.currentOperand.includes(".") &&
+      this.currentOperand.length >= 6
+    ) {
+      return
+    }
+
+    this.currentOperand += number.toString()
+  }
 
   chooseOperation(operation) {}
 
   compute() {}
 
-  updateDisplay() {}
+  updateDisplay() {
+    this.display.innerText = this.currentOperand
+  }
 }
