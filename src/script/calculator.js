@@ -62,6 +62,7 @@ class Calculator {
         this.operation += this.currentOperand + "*"
         break
       case "opDIV":
+	this.limiter = false
         this.operation += this.currentOperand + "/"
         break
       case "opPCT":
