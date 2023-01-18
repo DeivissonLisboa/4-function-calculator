@@ -70,7 +70,7 @@ class Calculator {
         break
       case "opSQR":
         this.limiter = false
-        this.compute(this.currentOperand + "**0.5")
+        this.compute(this.currentOperand + "**0.5", false)
         break
       default:
         break
@@ -79,12 +79,12 @@ class Calculator {
     this.newOperaton = true
   }
 
-  compute(operation) {
+  compute(operation, now = true) {
     if (!operation) {
       return
     }
 
-    operation += this.currentOperand
+    if (now) operation += this.currentOperand
 
     try {
       this.currentOperand = eval(operation.replace(/[\W]$/, "")).toString()
@@ -95,7 +95,7 @@ class Calculator {
     this.operation = ""
     this.newOperaton = true
 
-    if (this.limiter && this.currentOperand.length > 6) {
+    if (!this.limiter && this.currentOperand.length > 6) {
       this.currentOperand = this.currentOperand.slice(0, 7)
     } else if (this.currentOperand.length > 8) {
       this.currentOperand = "Error"
@@ -112,5 +112,12 @@ class Calculator {
     } else {
       this.display.innerText = this.currentOperand
     }
+  }
+
+  blinkDisplay() {
+    this.display.style.visibility = "hidden"
+    setTimeout(() => {
+      this.display.style.visibility = "visible"
+    }, 100)
   }
 }

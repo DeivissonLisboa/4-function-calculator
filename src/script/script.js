@@ -3,6 +3,7 @@ const operationBtns = document.querySelectorAll(".operation")
 const equalBtn = document.querySelector(".equal")
 const clearBtn = document.querySelector(".clr")
 const resultText = document.querySelector("#result")
+const allBtns = document.querySelectorAll("button")
 
 const calculator = new Calculator(resultText)
 
@@ -23,3 +24,9 @@ clearBtn.addEventListener("click", () => calculator.clear())
 equalBtn.addEventListener("click", () =>
   calculator.compute(calculator.operation)
 )
+
+allBtns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    calculator.blinkDisplay()
+  })
+})
