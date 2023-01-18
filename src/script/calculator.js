@@ -11,10 +11,8 @@ class Calculator {
     this.updateDisplay()
   }
 
-  appendNumber(number) {
-    if (number === "." && this.currentOperand.includes(".")) return
-
-    if (this.currentOperand.includes(".") && this.currentOperand.length > 6) {
+  checkLength() {
+    if (this.currentOperand.includes(".") && this.currentOperand.length > 7) {
       return
     } else if (
       !this.currentOperand.includes(".") &&
@@ -23,9 +21,17 @@ class Calculator {
       return
     }
 
-    if (this.hasOperaton) {
+    return 1
+  }
+
+  appendNumber(number) {
+    if (number === "." && this.currentOperand.includes(".")) return
+
+    if (!this.checkLength() && !this.newOperaton) return
+
+    if (this.newOperaton) {
       this.currentOperand = number.toString()
-      this.hasOperaton = false
+      this.newOperaton = false
     } else {
       this.currentOperand += number.toString()
     }
@@ -36,7 +42,7 @@ class Calculator {
       this.currentOperand = 0
     }
 
-    if (this.operation) {
+    if (this.operation.match(/\w/)) {
       this.compute(this.operation)
     }
 
@@ -61,16 +67,33 @@ class Calculator {
         break
     }
 
-    console.log(this.operation)
-
-    this.hasOperaton = true
+    this.newOperaton = true
   }
 
-  compute(operation) {}
+  compute(operation) {
+    if (!operation) {
+      return
+    }
+
+    operation += this.currentOperand
+
+    try {
+      this.currentOperand = eval(operation.replace(/[\W]$/, "")).toString()
+    } catch (err) {
+      this.currentOperand = "Error"
+    }
+
+    this.operation = ""
+    this.newOperaton = true
+
+    this.updateDisplay()
+  }
 
   updateDisplay() {
     if (this.currentOperand === "") {
       this.display.innerText = 0
+    } else if (!this.checkLength()) {
+      this.display.innerText = this.currentOperand.slice(0, 7)
     } else {
       this.display.innerText = this.currentOperand
     }

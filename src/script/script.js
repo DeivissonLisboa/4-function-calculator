@@ -20,3 +20,6 @@ operationBtns.forEach((btn) => {
 })
 
 clearBtn.addEventListener("click", () => calculator.clear())
+equalBtn.addEventListener("click", () =>
+  calculator.compute(calculator.operation)
+)
