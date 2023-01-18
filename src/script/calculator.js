@@ -6,8 +6,8 @@ class Calculator {
 
   clear() {
     this.currentOperand = ""
-    this.previuosOperand = ""
-    this.operation = undefined
+    this.operation = ""
+    this.hasOperaton = false
     this.updateDisplay()
   }
 
@@ -23,12 +23,50 @@ class Calculator {
       return
     }
 
-    this.currentOperand += number.toString()
+    if (this.hasOperaton) {
+      this.currentOperand = number.toString()
+      this.hasOperaton = false
+    } else {
+      this.currentOperand += number.toString()
+    }
   }
 
-  chooseOperation(operation) {}
+  chooseOperation(operation) {
+    if (!this.currentOperand) {
+      this.currentOperand = 0
+    }
 
-  compute() {}
+    if (this.operation) {
+      this.compute(this.operation)
+    }
+
+    switch (operation) {
+      case "opSUM":
+        this.operation += this.currentOperand + "+"
+        break
+      case "opSUB":
+        this.operation += this.currentOperand + "-"
+        break
+      case "opTIMES":
+        this.operation += this.currentOperand + "*"
+        break
+      case "opDIV":
+        this.operation += this.currentOperand + "/"
+        break
+      case "opPCT":
+        break
+      case "opSQR":
+        break
+      default:
+        break
+    }
+
+    console.log(this.operation)
+
+    this.hasOperaton = true
+  }
+
+  compute(operation) {}
 
   updateDisplay() {
     if (this.currentOperand === "") {
