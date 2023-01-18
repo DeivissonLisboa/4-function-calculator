@@ -12,10 +12,13 @@ class Calculator {
   }
 
   checkLength() {
-    if (this.currentOperand.includes(".") && this.currentOperand.length > 7) {
+    if (
+      this.currentOperand.toString().includes(".") &&
+      this.currentOperand.length > 7
+    ) {
       return
     } else if (
-      !this.currentOperand.includes(".") &&
+      !this.currentOperand.toString().includes(".") &&
       this.currentOperand.length >= 6
     ) {
       return
@@ -25,7 +28,7 @@ class Calculator {
   }
 
   appendNumber(number) {
-    if (number === "." && this.currentOperand.includes(".")) return
+    if (number === "." && this.currentOperand.toString().includes(".")) return
 
     if (!this.checkLength() && !this.newOperaton) return
 
@@ -38,6 +41,8 @@ class Calculator {
   }
 
   chooseOperation(operation) {
+    this.limiter = true
+
     if (!this.currentOperand) {
       this.currentOperand = 0
     }
@@ -60,8 +65,12 @@ class Calculator {
         this.operation += this.currentOperand + "/"
         break
       case "opPCT":
+        this.limiter = false
+        this.operation += +this.currentOperand / 100 + "*"
         break
       case "opSQR":
+        this.limiter = false
+        this.compute(this.currentOperand + "**0.5")
         break
       default:
         break
@@ -86,6 +95,12 @@ class Calculator {
     this.operation = ""
     this.newOperaton = true
 
+    if (this.limiter && this.currentOperand.length > 6) {
+      this.currentOperand = this.currentOperand.slice(0, 7)
+    } else if (this.currentOperand.length > 8) {
+      this.currentOperand = "Error"
+    }
+
     this.updateDisplay()
   }
 
@@ -93,7 +108,7 @@ class Calculator {
     if (this.currentOperand === "") {
       this.display.innerText = 0
     } else if (!this.checkLength()) {
-      this.display.innerText = this.currentOperand.slice(0, 7)
+      this.display.innerText = this.currentOperand.slice(0, 6)
     } else {
       this.display.innerText = this.currentOperand
     }
